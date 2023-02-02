@@ -5,17 +5,19 @@
     </div>
     <div class="py-2 mt-2 grid grid-cols-2 md:grid-cols-4 gap-4">
       <!-- Card Para mostrar los productos -->
-      <div class="pb-5 max-w-full" *ngFor="let data of image">
-        <h2 class="mb-2 text-[#981352]">Fruta de Temporada</h2>
-        <img class="bg-green-200 h-40" src="https://www.aperitivoslareal.com/wp-content/uploads/2021/01/Aperitivos-LA-REAL-Blog-10-beneficios-de-las-legumbres-en-tu-dieta-5.jpg" alt="image" />
+      <div class="pb-5 max-w-full" *ngFor="let data of productos">
+        <h2 class="mb-2 text-[#981352]">{{data.nombre}}</h2>
+        <img class="bg-green-200 w-60 h-40" src="{{data.imagen}}" alt="image" />
         <div>
-          <p class="text-[#981352]">120</p>
+          <p class="text-[#981352]">{{data.costo |currency:'S/. '}}</p>
         </div>
         <div class="grid grid-cols-1">
           <div>
             <button class="text-[#981352]">Agregar carrito</button>
           </div>
-          <a href="" class="text-[#981352]">Ver mas</a>
+          <div>
+            <a  (click)="mostrarDetalle(data.id)" class="text-[#981352] cursor-pointer">Ver mas</a>
+          </div>
         </div>
       </div>
       <!-- Fin card mostrar productos -->

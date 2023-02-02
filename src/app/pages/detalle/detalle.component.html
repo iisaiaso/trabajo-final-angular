@@ -1,20 +1,29 @@
 <div class="w-[60%] mx-auto mt-10 py-2 px-10">
-  <div class="w-[80%] mx-auto py-2 flex gap-2">
-    <div class="w-80 py-2">
-      <h1 class="text-lg text-[#981352] font-semibold mb-2">Fruta de Temporada</h1>
-      <img class="bg-yellow-200 h-40" src="https://www.aperitivoslareal.com/wp-content/uploads/2021/01/Aperitivos-LA-REAL-Blog-10-beneficios-de-las-legumbres-en-tu-dieta-5.jpg" alt="image" />
-    </div>
-    <div class="h-full w-[80%] mt-10 font-semibold font-semibold text-lg">
-      <p class="text-justify text-[#981352]">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita,
-        facere nisi ad reiciendis unde nam culpa perferendis voluptatibus quas
-        provident excepturi, quidem quibusdam totam voluptatum odio est? Quam,
-        quis optio.
-      </p>
-      <div class="mt-10 text-lg text-[#981352] font-semibold">
-        <p>S/ 120</p>
-        <button>Agregar carrito</button>
-      </div>
+  <h1 class="text-center text-4xl font-bold text-[#981352] mb-3">Detalle del Producto</h1>
+  <div class="h-0.5 bg-[#981352]"></div>
+  <div *ngFor="let data of productos">
+    <div class="w-[80%] mx-auto py-2 flex gap-2 " *ngIf="id == data.id">
+        <div class="py-2">
+          <h2 class="text-lg text-[#981352] font-semibold mb-2">{{data.nombre}}</h2>
+          <img class="bg-yellow-200 h-40 w-60" src="{{data.imagen}}" alt="image" />
+        </div>
+        <div class="h-full w-[50%] mt-11 px-2 font-semibold font-semibold text-lg">
+          <p class="text-justify text-[#981352]">
+            {{data.descripcion}}
+          </p>
+          <div class="mt-10 text-lg text-[#981352] font-semibold ">
+            <p>{{data.costo |currency:'S/. '}}</p>
+            <p class="font-medium text-xs mt-1 mb-2">Seleccione la cantidad</p>
+            <div class="mb-2 md:flex"> 
+              <button (click)="decremento()"
+              class="text-2xl text-red-600  px-2 rounded"><i class="fa-solid fa-minus"></i></button>
+              <div class="w-14 pl-4 border-2 pb-2 pt-1 bg-gray-200 rounded-xl text-4xl font-light">{{resultado}}</div>
+              <button (click)="incrementar()"
+              class="text-2xl text-blue-600 px-1 rounded "><i class="fa-solid fa-plus"></i></button>
+            </div>
+            <button (click)="savePedido({ nombre: data.nombre, costo: data.costo, cantidad: resultado })"><i class="fa-solid fa-cart-shopping"></i> Agregar carrito</button>
+          </div>
+        </div>
     </div>
   </div>
 </div>

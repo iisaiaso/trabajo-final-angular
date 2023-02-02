@@ -4,7 +4,7 @@
       <!-- Contenedor de la trabla de  Producto admin  -->
       <div class="py-2 mt-3">
         <div>
-            <button class="bg-blue-600 px-3 py-2 rounded-lg  text-white">Agregar Producto</button>
+            <button class="bg-blue-600 px-3 py-2 rounded-lg  text-white"><a routerLink="/register-product">Agregar Producto</a></button>
         </div>
       <div class="flex flex-col">
           <div class="overflow-x-auto lg:-mx-6 lg:-mx-8">
@@ -22,31 +22,25 @@
                       <th scope="col" class="text-[18px] font-bold text-black px-6 py-4 text-center">
                         Costo
                       </th>
-                      <th scope="col" class="text-[18px] font-bold text-black px-6 py-4 text-center">
-                        Cantidad
-                      </th>
                       <th scope="col" class="text-[18px] font-bold text-black px-6 py-4 text-center min-w-full md:w-40">
                         Oferta
                       </th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr class="border-b border-black">
-                      <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-[#981352] text-center">1</td>
+                    <tr class="border-b border-black" *ngFor="let data of productos;let i =index">
+                      <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-black text-center">{{i+1}}</td>
                       <td class="text-ld text-black font-medium px-6 py-4 whitespace-nowrap text-center">
-                        Fruta de verano
+                        {{data.nombre}}
                       </td>
                       <td class="text-lg text-black font-medium px-6 py-4 whitespace-nowrap text-center">
-                        80
+                        {{data.costo | currency: 'S/. '}}
                       </td>
                       <td class="text-lg text-black font-medium px-6 py-4 whitespace-nowrap text-center">
-                        2
-                      </td>
-                      <td class="text-lg text-black font-medium px-6 py-4 whitespace-nowrap text-center">
-                        160
+                        {{data.oferta | currency: 'S/. '}}
                       </td>
                       <td class="text-md text-white font-medium px-6 py-4 whitespace-nowrap text-center">
-                        <button class="bg-red-500 px-3 py-2 rounded-lg ">Borrar</button>
+                        <button class="bg-red-500 px-3 py-2 rounded-lg"><a (click)="onDeleteProduct(data)">Borrar</a></button>
                       </td>
                     </tr>
                   </tbody>

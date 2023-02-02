@@ -9,17 +9,20 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegisterUserComponent } from './pages/register-user/register-user.component';
 import { RegisterProductComponent } from './pages/register-product/register-product.component';
 import { ProductAdminComponent } from './pages/product-admin/product-admin.component';
+import { canActivate, redirectLoggedInTo, redirectUnauthorizedTo } from "@angular/fire/auth-guard";
 
 const routes: Routes = [
+  
+  { path: '', component: InicioComponent },
+  { path: 'detalle/:id', component: DetalleComponent },
+  { path: 'pedido', component: PedidosComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'login', component: LoginComponent, ...canActivate(() => redirectLoggedInTo(['/']))},
+  { path: 'producto', component: ProductoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login']))},
+
   { path: 'home', component: HomeComponent },
-  { path: 'producto', component: ProductoComponent },
-  { path: 'detalle', component: DetalleComponent },
-  { path: 'pedido', component: PedidosComponent },
-  { path: 'inicio', component: InicioComponent },
-  { path: 'login', component: LoginComponent },
   { path: 'register-user', component: RegisterUserComponent },
   { path: 'register-product', component: RegisterProductComponent },
-  { path: 'product-admin', component: ProductAdminComponent}
+  { path: 'product-admin', component: ProductAdminComponent }
 ];
 
 @NgModule({

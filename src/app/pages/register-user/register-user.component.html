@@ -1,14 +1,17 @@
 <div class="mx-auto max-w-6xl bg-white mt-10 px-12 lg:px-24 mb-24 ">
-    <form>
+    <form [formGroup]="formRegisterUser">
       <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 flex flex-col max-w-lg mx-auto">
         <h1 class="uppercase font-semibold text-center text-xl py-1">Formulario Registro</h1>
         <!-- Input Nombre y apellido -->
         <div class="-mx-3">
             <div class="px-3 mb-6 md:mb-0">
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="company">
+              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 Nombres*
               </label>
-              <input class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3" id="company" type="text" placeholder="Netboard">
+              <input 
+              type="text"
+              formControlName="nombre"
+              class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3">
               <div>
                 <!-- <span class="text-red-500 text-xs italic">
                   Please fill out this field.
@@ -16,10 +19,13 @@
               </div>
             </div>
             <div class="px-3">
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="title">
+              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 Apellidos*
               </label>
-              <input class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3" id="title" type="text" placeholder="Software Engineer">
+              <input 
+              type="text"
+              formControlName="apellidos"
+              class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3">
             </div>
           </div>
         <!-- Fin Input Nombre y apellido -->
@@ -30,7 +36,10 @@
               <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="company">
                 Nombre de Usuario*
               </label>
-              <input class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3" id="company" type="text" placeholder="Netboard">
+              <input 
+              type="text"
+              formControlName="nombreUsuario"
+              class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3" >
               <div>
                 <!-- <span class="text-red-500 text-xs italic">
                   Please fill out this field.
@@ -38,41 +47,38 @@
               </div>
             </div>
             <div class="px-3">
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="title">
+              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 Correo*
               </label>
-              <input class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3" id="title" type="text" placeholder="Software Engineer">
+              <input 
+              type="text"
+              formControlName="correo"
+              class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3">
             </div>
 
             <div class="px-3">
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="title">
+              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2">
                 Contraseña*
               </label>
-              <input class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3" id="title" type="text" placeholder="Software Engineer">
+              <input 
+              type="password"
+              formControlName="contraseña"
+              class="w-full bg-gray-200 text-black border border-gray-200 outline-0 rounded py-3 px-4 mb-3">
             </div>
           </div>
         <!-- Fin Input email, username y passsword -->
         
         <!-- Inicio de los Select -->
         <div class="-mx-3 mb-2">
-            <!-- <div class="px-3 mb-6 md:mb-0">
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="location">
-                Status*
-              </label>
-              <div>
-                <select class="w-full bg-gray-200 border border-gray-200 outline-0 text-black text-md py-3 px-4 pr-8 mb-3 rounded" id="location">
-                  <option>Abuja</option>
-                  <option>Enugu</option>
-                  <option>Lagos</option>
-                </select>
-              </div>
-            </div> -->
             <div class=" px-3">
-              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" for="job-type">
+              <label class="uppercase tracking-wide text-black text-xs font-bold mb-2" >
                 Rol*
               </label>
               <div>
-                <select class="w-full bg-gray-200 border border-gray-200 outline-0 text-black text-md py-3 px-4 pr-8 mb-3 rounded" id="job-type">
+                <select 
+                type="text"
+                formControlName="rol"
+                class="w-full bg-gray-200 border border-gray-200 outline-0 text-black text-md py-3 px-4 pr-8 mb-3 rounded" id="job-type">
                   <option value="" selected>Seleciona una opcion</option>
                   <option value="0">Admin</option>
                   <option value="1">User</option>
@@ -83,7 +89,9 @@
         <!-- Fin de los Select -->
             <div class="-mx-3 md:flex mt-2">
               <div class="md:w-full px-3">
-                <button class="md:w-full bg-blue-700 text-white font-bold py-2 px-4 border-b-4 hover:border-b-2 border-blue-500 hover:border-gray-100 rounded-full">
+                <button 
+                (click)="saveUSer()" 
+                class="md:w-full bg-blue-700 text-white font-bold py-2 px-4 border-b-4 hover:border-b-2 border-blue-500 hover:border-gray-100 rounded-full">
                   Registrar
                 </button>
               </div>

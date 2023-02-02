@@ -4,12 +4,13 @@
     <div class="mx-auto">
       <h2 class="text-2xl font-semibold mb-5">Productos</h2>
       <div class="200">
-        <form action="">
+        <form [formGroup]="formRegisterProduct">
           <div>
             <!-- Input nombre -->
             <div class="w-full flex mb-3">
               <label for="" class="mt-1 text-md text-black font-semibold"> Nombre </label>
-              <input type="text" 
+              <input type="text"
+              formControlName="nombre" 
               class="w-[500px] px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ml-9"/>
             </div>
             <!-- Fin input nombre -->
@@ -17,7 +18,8 @@
             <!-- Input descripcion -->
             <div class="w-full flex  mb-3">
               <label for="" class="mt-1 text-md text-black font-semibold"> Descripcion </label>
-              <textarea 
+              <textarea
+              formControlName="descripcion" 
               class="w-[500px] px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ml-3" 
               cols="30" rows="3"></textarea>
 
@@ -28,13 +30,15 @@
              <div class=" lg:grid lg:grid-cols-2 gap-2 w-[600px] ">
                   <div class="w-full flex  mb-3">
                     <label for="" class="mt-1 text-md text-black font-semibold"> Costo </label>
-                    <input type="text" 
+                    <input type="number"
+                    formControlName="costo" 
                     class="py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ml-[55px]"/>
                   </div>
 
                   <div class="w-full flex  mb-3">
-                    <label for="" class="mt-1 text-md text-black font-semibold"> Oferta </label>
-                    <input type="text" class="py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ml-[60px]"/>
+                    <label for="" class="mt-1 text-md text-black font-semibold ml-5"> Oferta </label>
+                    <input type="number"
+                    formControlName="oferta" class="py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ml-[20px]"/>
                   </div>
              </div>
               <!-- Fin input costo y oferta -->
@@ -42,14 +46,17 @@
              <!-- Input imagen -->
              <div class="w-full flex  mb-3">
                 <label for="" class="mt-1 text-md text-black font-semibold"> Imagen </label>
-                <input type="text" 
+                <input type="text"
+                formControlName="imagen" 
                  class="w-[500px] px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none ml-11"/>
               </div>
               <!-- Fin input imagen -->
           </div>
           <!-- Boton Registrar -->
             <div class="text-center">
-                <button class="bg-blue-600 py-2 text-white font-semibold px-3 rounded-lg">Registrar producto</button>
+                <button 
+                (click)="saveProducts({ nombre:formRegisterProduct.value.nombre, descripcion:formRegisterProduct.value.descripcion, costo:formRegisterProduct.value.costo, oferta:formRegisterProduct.value.oferta, imagen:formRegisterProduct.value.imagen})"
+                class="bg-blue-600 py-2 text-white font-semibold px-3 rounded-lg">Registrar producto</button>
             </div>
           <!-- Fin Boton Registrar -->
         </form>

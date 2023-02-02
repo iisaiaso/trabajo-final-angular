@@ -28,19 +28,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr class="border-b border-[#981352]">
-                    <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-[#981352] text-center">1</td>
+                  <tr class="border-b border-[#981352]" *ngFor="let item of pedido;let i = index">
+                    <td class="px-6 py-4 whitespace-nowrap text-md font-medium text-[#981352] text-center">{{i+1}}</td>
                     <td class="text-ld text-[#981352] font-medium px-6 py-4 whitespace-nowrap text-center">
-                      Fruta de verano
+                     {{item.nombre}}
                     </td>
                     <td class="text-lg text-[#981352] font-medium px-6 py-4 whitespace-nowrap text-center">
-                      80
+                      {{item.costo}}
                     </td>
                     <td class="text-lg text-[#981352] font-medium px-6 py-4 whitespace-nowrap text-center">
-                      2
+                      {{item.cantidad}}
                     </td>
                     <td class="text-lg text-[#981352] font-medium px-6 py-4 whitespace-nowrap text-center">
-                      160
+                      {{item.costo * item.cantidad}}
                     </td>
                   </tr>
                   <tr class="">
@@ -49,7 +49,7 @@
                       Total
                     </td>
                     <td class="text-lg text-[#981352] font-medium px-6 py-4 whitespace-nowrap text-center">
-                      160
+                      {{suma}}
                     </td>
                   </tr>
                 </tbody>

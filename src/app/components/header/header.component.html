@@ -8,10 +8,10 @@
     <span class="example-spacer"></span>
     <div class="md:hidden block ">
         <div class=" md:mx-1 inline">
-            <a href="" class="text-3xl text-white"><i class="fa-solid fa-circle-user"></i></a>
+            <a routerLink="/login" class="text-3xl text-white"><i class="fa-solid fa-circle-user"></i></a>
         </div>
         <div class="ml-2 md:mx-1 inline">
-            <a href="" class="text-3xl text-white"><i class="fa-solid fa-right-from-bracket"></i></a>
+            <a (click)="logoutUser()" class="text-3xl text-white"><i class="fa-solid fa-right-from-bracket"></i></a>
         </div>
       </div>
     <span class="text-3xl cursor-pointer mx-1 md:hidden block">
@@ -20,19 +20,19 @@
   </div>
   <ul class="md:flex md:items-center z-[-1] md:z-auto md:static bg-[#CA0C66] w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
     <li class="mx-1 mt-3 md:my-0">
-      <a href="#" class="text-md font-['Poppins'] pr-3 text-white hover:text-gray-900 duration-500">Inicio </a>
+      <a routerLink="/" class="text-md font-['Poppins'] pr-3 text-white hover:text-gray-900 duration-500">Inicio </a>
     </li>
     <li class="mx-1 my-2 md:my-0">
-      <a href="#" class="text-md font-['Poppins'] pr-3 text-white hover:text-gray-900 duration-500">Productos</a>
+      <a routerLink="/producto" class="text-md font-['Poppins'] pr-3 text-white hover:text-gray-900 duration-500">Productos</a>
     </li>
   </ul>
   <span class="example-spacer"></span>
   <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-[#CA0C66] w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px] transition-all ease-in duration-500">
     <li class="mx-1 mt-1 md:my-0">
-        <a href="#" class="text-3xl px-2 text-white hover:text-gray-900 duration-500 inline"><i class="fa-solid fa-circle-user"></i></a>
+        <a routerLink="/login" class="text-3xl px-2 text-white hover:text-gray-900 duration-500 inline"><i class="fa-solid fa-circle-user"></i></a>
     </li>
     <li class="mx-1 mt-2 md:my-0">
-        <a href="#" class="text-3xl px-2 text-white hover:text-gray-900 duration-500"><i class="fa-solid fa-right-from-bracket"></i></a>
+        <a (click)="logoutUser()" class="text-3xl px-2 text-white hover:text-gray-900 duration-500"><i class="fa-solid fa-right-from-bracket"></i></a>
     </li> 
   </ul>
 </nav>
