@@ -18,9 +18,14 @@
       <div class="pb-5 max-w-full" *ngFor="let data of arrayps">
         <h2 class="mb-2 text-[#981352]">{{data.nombre}}</h2>
         <img class="bg-green-200 h-40 w-60" src="{{data.imagen}}" alt="image" />
+       <div class="flex justify-between">
         <div>
-          <p class="text-[#981352]">{{data.costo |currency:'S/. '}}</p>
+          <p [ngClass]="data.oferta? 'line-through text-[#981352]':''">{{data.costo |currency:'S/. '}}</p>
         </div>
+        <div *ngIf="data.oferta > 0">
+          <p class="text-blue-500 text-lg">Oferta: {{data.costo - data.oferta |currency:'S/. '}}</p>
+        </div>
+       </div>
         <div class="grid grid-cols-1">
           <div>
             <button class="text-[#981352]">Agregar carrito</button>

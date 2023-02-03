@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { UserGuardService } from 'src/app/services/user-guard.service';
 import Swal from 'sweetalert2';
 import { UserService } from 'src/app/services/user.service';
+import { Users } from 'src/app/interface/users';
 
 @Component({
   selector: 'app-header',
@@ -14,10 +15,12 @@ export class HeaderComponent {
   login: boolean = false
   rol: string ='3'
   nombre!: string
+  array!:Users[]
   constructor(private authServiceLogout: UserGuardService, private route: Router, private userServ: UserService) {
     this.authServiceLogout.stateUSer().subscribe(res => {
       if (res) {
         console.log('esta logeado');
+        console.log('UID->', res.uid);
         this.login = true
         this.getUSerData(res.uid)
       } else {
@@ -58,12 +61,27 @@ export class HeaderComponent {
   getUSerData(uid: string) {
     const path = 'users'
     const id = uid
-    this.userServ.getUser(id, path).subscribe(res => {
+    this.userServ.getUser(path).subscribe(res => {
       console.log('info ->', res)
-      if (res) {
-        for (let u of res) {
-          this.rol = u.rol
-          this.nombre = u.nombre
+      this.array = res
+      console.log("array ->",this.array);
+      
+      if (this.array) {
+        console.log(this.array);
+        
+        for (let u of this.array) {
+          // console.log("id ->", u.id); 
+          // console.log("rol ->", u.rol); 
+          // console.log("rol ->", u.nombre); 
+         if(u.id == id){
+          
+             this.rol = u.rol
+             this.nombre = u.nombre
+             console.log("name ->", this.nombre);
+            //  console.log("id ->", u.id); 
+             console.log("rol ->", u.rol); 
+             
+         }
         }
       }
     })

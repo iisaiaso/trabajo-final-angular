@@ -12,8 +12,15 @@
             {{data.descripcion}}
           </p>
           <div class="mt-10 text-lg text-[#981352] font-semibold ">
-            <p>{{data.costo |currency:'S/. '}}</p>
-            <p class="font-medium text-xs mt-1 mb-2">Seleccione la cantidad</p>
+            <div class="flex justify-between items-center h-14">
+              <div>
+                <p [ngClass]="data.oferta? 'line-through text-[#981352]':''">{{data.costo |currency:'S/. '}}</p>
+              </div>
+              <div *ngIf="data.oferta > 0">
+                <p class="text-blue-500 text-2xl font-light font-bold">Oferta: {{data.costo - data.oferta |currency:'S/. '}}</p>
+              </div>
+            </div>
+            <p class="font-medium text-xs mb-2">Seleccione la cantidad</p>
             <div class="mb-2 md:flex"> 
               <button (click)="decremento()"
               class="text-2xl text-red-600  px-2 rounded"><i class="fa-solid fa-minus"></i></button>
@@ -21,7 +28,12 @@
               <button (click)="incrementar()"
               class="text-2xl text-blue-600 px-1 rounded "><i class="fa-solid fa-plus"></i></button>
             </div>
-            <button (click)="savePedido({ nombre: data.nombre, costo: data.costo, cantidad: resultado })"><i class="fa-solid fa-cart-shopping"></i> Agregar carrito</button>
+            <div *ngIf="data.oferta > 0;else other">
+              <button class="text-blue-500" (click)="savePedido({ nombre: data.nombre, costo: data.costo - data.oferta, cantidad: resultado })"><i class="fa-solid fa-cart-shopping"></i> Agregar carrito</button>
+            </div>
+            <ng-template #other>
+              <button (click)="savePedido({ nombre: data.nombre, costo: data.costo, cantidad: resultado })"><i class="fa-solid fa-cart-shopping"></i> Agregar carrito</button>
+            </ng-template>
           </div>
         </div>
     </div>

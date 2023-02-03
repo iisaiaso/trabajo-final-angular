@@ -1,4 +1,4 @@
-import { User } from './../interface/users';
+// import { User } from './../interface/users';
 import { Injectable } from '@angular/core';
 import { collection, collectionData, doc, Firestore, setDoc, } from '@angular/fire/firestore';
 import { Users } from '../interface/users';
@@ -17,8 +17,8 @@ export class UserService {
     return setDoc(docRef, user)
   }
  
-  getUser(id:string, path:string): Observable<User[]> {
+  getUser(path:string): Observable<Users[]> {
     const refProduct = collection(this.fireStore, path)
-    return collectionData(refProduct, { idField: id }) as Observable<User[]>
+    return collectionData(refProduct, { idField: 'id' }) as Observable<Users[]>
   }
 }

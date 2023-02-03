@@ -1,7 +1,7 @@
 import { Injectable, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, UserCredential } from '@angular/fire/auth';
-import { User } from '../interface/users';
+import { Users } from '../interface/users';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class UserGuardService implements OnInit {
   }
 
   //Registrar Usuario
-  isRegisterUser(user : User) {
+  isRegisterUser(user : Users) {
     return this.ath.createUserWithEmailAndPassword(user.correo, user.contraseña)
     // return createUserWithEmailAndPassword(this.auth, email, password)
   }
