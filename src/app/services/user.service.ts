@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { addDoc, collection, Firestore } from '@angular/fire/firestore';
+import { doc, Firestore, setDoc, } from '@angular/fire/firestore';
 import { Users } from '../interface/users';
 
 @Injectable({
@@ -7,11 +7,11 @@ import { Users } from '../interface/users';
 })
 export class UserService {
 
-  constructor(private fireStore:Firestore) { }
+  constructor(private fireStore: Firestore) { }
 
   // Agregar un usuario
-  addProduct(user:Users){
-    const productoRef = collection(this.fireStore, 'users')
-    return addDoc(productoRef,user)
+  addUSer(user: any, path: string, id: string): Promise<void> {
+    const docRef = doc(this.fireStore, path, id)
+    return setDoc(docRef, user)
   }
 }

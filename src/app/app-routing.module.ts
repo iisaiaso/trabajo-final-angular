@@ -15,14 +15,14 @@ const routes: Routes = [
   
   { path: '', component: InicioComponent },
   { path: 'detalle/:id', component: DetalleComponent },
-  { path: 'pedido', component: PedidosComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'pedido', component: PedidosComponent, ...canActivate(() => redirectUnauthorizedTo(['/login']))},
   { path: 'login', component: LoginComponent, ...canActivate(() => redirectLoggedInTo(['/']))},
   { path: 'producto', component: ProductoComponent, ...canActivate(() => redirectUnauthorizedTo(['/login']))},
 
   { path: 'home', component: HomeComponent },
-  { path: 'register-user', component: RegisterUserComponent },
-  { path: 'register-product', component: RegisterProductComponent },
-  { path: 'product-admin', component: ProductAdminComponent }
+  { path: 'register-user', component: RegisterUserComponent},
+  { path: 'register-product', component: RegisterProductComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) },
+  { path: 'product-admin', component: ProductAdminComponent, ...canActivate(() => redirectUnauthorizedTo(['/login'])) }
 ];
 
 @NgModule({

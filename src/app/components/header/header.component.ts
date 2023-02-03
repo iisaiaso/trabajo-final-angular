@@ -9,8 +9,25 @@ import Swal from 'sweetalert2';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-
-  constructor(private authServiceLogout : UserGuardService, private route : Router){}
+ login:boolean = false
+  constructor(private authServiceLogout: UserGuardService, private route: Router) { 
+    this.authServiceLogout.stateUSer().subscribe(res =>{
+        if(res){
+          console.log('esta logeado');
+          this.login=true
+            
+        }else{
+          console.log('No esta logeado');
+          Swal.fire({
+            icon:'info',
+            text: 'No esta logeado!',
+            showConfirmButton: false,
+            timer: 1500
+          })
+          this.login=false
+        }
+    })
+  }
 
   logoutUser() {
     Swal.fire({
@@ -28,9 +45,6 @@ export class HeaderComponent {
           'success'
         )
         this.authServiceLogout.isLogOut()
-        console.log(this.authServiceLogout.isLogOut());
-        
-        // localStorage.removeItem('logeado')
         this.route.navigate(['/'])
       }
     })

@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   formLogin!: FormGroup
 
   constructor(private authServiceLogin: UserGuardService, private formBuilder: FormBuilder, private route: Router) { }
-  
+
   ngOnInit(): void {
     this.formLogin = this.formBuilder.group({
       email: ['', [Validators.required]],
@@ -22,31 +22,39 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  sendLogin() {
+  async sendLogin() {
+    //Para ingresar al por el login
+    // console.log("Credenciales -> ", this.formLogin.value);
     if (this.formLogin.valid) {
-      this.authServiceLogin.isLogin(this.formLogin.value)
-        .then(res => {
-          if (res) {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: `Bienvenido ${this.formLogin.value.email}`,
-              showConfirmButton: false,
-              timer: 1500
-            })
-            console.log(this.authServiceLogin.isLogin(this.formLogin.value));
-            
-            this.route.navigate(['/home'])
-          }
+      const res = this.authServiceLogin.isLogin(this.formLogin.value)
+        .catch(error => {
+          console.log("error");
+          Swal.fire({
+            icon: 'warning',
+            title: '',
+            text: 'Correo y contraseña incorrectas'
+          })
         })
-        .catch(error => { console.log(error) })
-    } else {
+
+      if (await res ) {
+        // console.log("res ->", res);
+        Swal.fire({
+          position: 'center',
+          icon: 'success',
+          title: `Bienvenido ${this.formLogin.value.email}`,
+          showConfirmButton: false,
+          timer: 1500
+        })
+        this.route.navigate(['/home'])
+      }
+    }else{
       Swal.fire({
         icon: 'warning',
         title: '',
-        text: 'Los campos no deben estar vacios!'
+        text: 'Los campos estan vacios'
       })
     }
+
 
   }
 

@@ -10,6 +10,8 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 
+import {AngularFireModule} from '@angular/fire/compat'; // este es el import
+
 var config = {
   apiKey: environment.firebase.apiKey,
   authDomain: environment.firebase.authDomain,
@@ -27,6 +29,8 @@ var config = {
     AppRoutingModule,
     ComponentsModule,
     PagesModule,
+    AngularFireModule,
+    AngularFireModule.initializeApp(environment.firebase), // importar angular fire module
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideFirestore(() => getFirestore()),
     provideAuth(() => getAuth())

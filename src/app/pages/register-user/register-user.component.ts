@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./register-user.component.css']
 })
 export class RegisterUserComponent implements OnInit {
+
   formRegisterUser!: FormGroup
   constructor(private userService: UserService, private userGuarServ: UserGuardService, private fb: FormBuilder, private route: Router) { }
 
@@ -27,31 +28,50 @@ export class RegisterUserComponent implements OnInit {
   }
 
   async saveUSer() {
-    console.log(this.formRegisterUser.value)
-    console.log(this.formRegisterUser.value.correo, this.formRegisterUser.value.contraseña)
-    if (this.formRegisterUser.valid) {
-      this.userService.addProduct(this.formRegisterUser.value)
-      this.userGuarServ.isRegisterUser(this.formRegisterUser.value.correo, this.formRegisterUser.value.contraseña)
-        .then(res => {
-          if (res) {
-            Swal.fire({
-              position: 'center',
-              icon: 'success',
-              title: `Se ha regitrado correctamente al producto`,
-              showConfirmButton: false,
-              timer: 1000
-            })
-            this.route.navigate(['/login'])
-          }
-        })
-        .catch(error => { console.log(error) })
+    //   if (this.formRegisterUser.valid) {
+    //     Swal.fire({
+    //       position: 'center',
+    //       icon: 'success',
+    //       title: `Se ha regitrado correctamente al producto`,
+    //       showConfirmButton: false,
+    //       timer: 1000
+    //     })
+    //     this.userGuarServ.isRegisterUser(this.formRegisterUser.value.correo, this.formRegisterUser.value.contraseña)
+    //     this.userService.addUser(this.formRegisterUser.value)
+    //     console.log(this.formRegisterUser.value)
+    //     this.route.navigate(['login'])
 
-    } else {
-      Swal.fire({
-        icon: 'warning',
-        title: '',
-        text: 'Los campos no deben estar vacios!'
+    //   } else {
+    //     Swal.fire({
+    //       icon: 'warning',
+    //       title: '',
+    //       text: 'Los campos no deben estar vacios!'
+    //     })
+    //   }
+    console.log("datos ->", this.formRegisterUser.value);
+    const res = await this.userGuarServ.isRegisterUser(this.formRegisterUser.value)
+      .catch(error => {
+        console.log("Error Registro");
       })
+
+    if (res) {
+      console.log("Exito a Registrar usuario");
+      const path = 'users'
+      const id = String(res.user?.uid)
+      console.log("UID ->", res.user?.uid);
+      this.formRegisterUser.value.contraseña = null
+      await this.userService.addUSer(this.formRegisterUser.value, path, id)
+        .catch(err => {
+          console.log("error");
+        })
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: `Se ha regitrado correctamente al producto`,
+        showConfirmButton: false,
+        timer: 1000
+      })
+      this.route.navigate(['/login'])
     }
   }
 

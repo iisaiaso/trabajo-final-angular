@@ -1,24 +1,38 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from '@angular/fire/auth';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, UserCredential } from '@angular/fire/auth';
+import { User } from '../interface/users';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserGuardService implements OnInit {
 
-  constructor(private auth: Auth) { }
+  constructor(private auth: Auth, private ath: AngularFireAuth) { }
   ngOnInit(): void {
   }
-  isRegisterUser(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password)
-  }
-  
-  isLogin({ email, password }: any) {
-    return signInWithEmailAndPassword(this.auth, email, password)
+
+  //Registrar Usuario
+  isRegisterUser(user : User) {
+    return this.ath.createUserWithEmailAndPassword(user.correo, user.contraseña)
+    // return createUserWithEmailAndPassword(this.auth, email, password)
   }
 
+  //Para iniciar sesion
+  isLogin({ email, password }: any) {
+    return this.ath.signInWithEmailAndPassword(email, password)
+    // return signInWithEmailAndPassword(this.auth, email, password)
+  }
+
+  // Para cerrar sesion
   isLogOut() {
-    return signOut(this.auth)
+    this.ath.signOut()
+    // return signOut(this.auth) 
+  }
+
+  //para saber el estado del user
+  stateUSer(){
+   return this.ath.authState
   }
 }
 

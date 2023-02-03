@@ -5,5 +5,13 @@ export interface Users {
     nombreUsuario: string
     correo: string
     contraseña: string
-    rol: number
+    rol: string
+}
+export interface User {
+    nombre: string
+    apellidos: string
+    nombreUsuario: string
+    correo: string
+    contraseña: string
+    rol: string
 }
