@@ -1,4 +1,5 @@
-<!-- {{login}} -->
+<!-- {{login}}
+{{rol}} -->
 <nav class="p-5 bg-[#CA0C66] shadow-lg md:flex md:items-center">
   <div class="flex justify-between items-center">
     <span class="text-2xl font-['Poppins'] font-bold cursor-pointer mx-5">
@@ -28,10 +29,20 @@
     <li class="mx-1 my-2 md:my-0">
       <a routerLink="/producto" class="text-md font-['Poppins'] pr-3 text-white hover:text-gray-900 duration-500">Productos</a>
     </li>
+    <li class="mx-1 my-2 md:my-0" *ngIf="rol=='0' && login">
+      <a routerLink="/product-admin" class="text-md font-['Poppins'] pr-3 text-white hover:text-gray-900 duration-500">Agregar Productos</a>
+    </li>
   </ul>
   <span class="example-spacer"></span>
   <ul class="md:flex md:items-center z-[-1] md:z-auto md:static absolute bg-[#CA0C66] w-full left-0 md:w-auto md:py-0 py-4 md:pl-0 pl-7 md:opacity-100 opacity-0 top-[-400px]">
-
+    <li class="mx-1 mt-1 md:my-0">
+      <p class="text-xl text-slate-800 font-semibold" *ngIf="rol=='0' && login">
+        Hola, {{nombre}} <i class="fa-regular fa-user m-2"></i>
+      </p>
+      <p class="text-xl text-slate-800 font-semibold" *ngIf="rol=='1' && login">
+        Hola, {{nombre}} <i class="fa-regular fa-user m-2"></i>
+      </p>
+  </li>
     <li class="mx-1 mt-2 md:my-0" *ngIf="login;else other">
         <a (click)="logoutUser()" class="text-3xl px-2 text-white hover:text-gray-900 duration-500"><i class="fa-solid fa-right-from-bracket"></i></a>
     </li> 

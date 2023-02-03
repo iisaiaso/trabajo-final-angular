@@ -59,7 +59,7 @@ export class RegisterUserComponent implements OnInit {
       const path = 'users'
       const id = String(res.user?.uid)
       console.log("UID ->", res.user?.uid);
-      this.formRegisterUser.value.contraseña = null
+      // this.formRegisterUser.value.contraseña = null
       await this.userService.addUSer(this.formRegisterUser.value, path, id)
         .catch(err => {
           console.log("error");
